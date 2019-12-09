@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: xdemo
+Version: 0.0.1
+Summary: A tool for NLP
+Home-page: https://github.com/pypa/sampleproject
+Author: Xiayf
+Author-email: xiayf@smail.nju.edu.cn
+License: MIT
+Description: #NLPTool
+        
+        
+        This is a simple NLP tools collection.
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 4 - Beta
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
