@@ -22,6 +22,52 @@
  语言模型|2|  
  网页展示优化|3|  
  
+ ## 部分功能使用说明  
+ ### 分句
+ ```python
+from Xdemo import Text
+ret = Text.sentence_cut('s1s2s3')
+ret
+['s1', 's2', 's3']
+```
+
+### 词频统计
+```python
+from Xdemo import Text
+ret = Text.count(sents, w)
+sents可以是句子或句子列表
+```
+### tf-idf
+```python
+from Xdemo import Text
+cnt = Text.TextCollection(sents)
+tfidf = cnt.tf_idf(term, text)
+```
+
+### 文本相似度
+```python
+from Xdemo import Text
+similarity = Text.similarity(text1, text2)
+暂时使用 1 - （最短编辑距离 / 较长句子长度）作为相似度。  
+后续计划使用embedding或者语言模型计算相似度。
+```
+
+### 词典
+```python
+目前只支持生成词典  
+python Vocabulary.py file > vocab
+
+```
+
+### 文本匹配
+```python
+from Xdemo import Text
+ret = Text.match(texts, substr)
+目前只支持精确匹配，后续计划增加模糊匹配和支持语义层次的匹配算法。
+
+```
+ 
+ 
 
 
 ## 快速使用
