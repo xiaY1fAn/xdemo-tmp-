@@ -1,5 +1,7 @@
 README.md
 setup.py
+Xdemo/Text.py
+Xdemo/Vocabulary.py
 Xdemo/__init__.py
 Xdemo/NER/NERTagger.py
 Xdemo/NER/__init__.py
@@ -10,6 +12,7 @@ Xdemo/POSTagger/__init__.py
 Xdemo/Tokenizer/Tokenize.py
 Xdemo/Tokenizer/Tokenizer.py
 Xdemo/Tokenizer/__init__.py
+Xdemo/Tools/__init__.py
 Xdemo/model/SequenceLabeling_bert.py
 Xdemo/model/__init__.py
 Xdemo/model/pytorch_pretrained_bert/__init__.py
