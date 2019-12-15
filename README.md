@@ -2,13 +2,13 @@
 
 ## 当前需要实现
 
-| 功能 | 完成 | 测试 |
-| ---- | --- | --— |
-| a | 吧 | c |
+ 功能|完成|测试   
+ -:|:-:|:-:  
+ a|吧|c  
 
 
 
-##快速使用
+## 快速使用
 ```python
 分词
 pyhon Tokenize.py -s sentence --model_dir model_dir #句子
@@ -21,7 +21,7 @@ NER、POS Tagging同上
 
 ```
 
-##作为包使用
+## 作为包使用
 
 ```python
 安装
