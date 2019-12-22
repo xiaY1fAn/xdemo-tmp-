@@ -2,6 +2,7 @@ import re
 import logging
 import copy
 import math
+import pypinyin
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
                     datefmt='%m/%d/%Y %H:%M:%S',
@@ -108,6 +109,74 @@ def match(texts, substr):
     return ret
 
 
+def get_pinyin(text, tone='normal', duoyin=False):
+    if tone == 'normal':
+        text_pinyin = pypinyin.pinyin(text, style=pypinyin.NORMAL, heteronym=duoyin)
+    else:
+        text_pinyin = pypinyin.pinyin(text, heteronym=duoyin)
+    if duoyin:
+        return text_pinyin
+    else:
+        ret = ''
+        for w in text_pinyin:
+            ret += ''.join(w) + ' '
+        return ret
+
+class Phrase(object):
+    '''短语提取'''
+    def __init__(self, text=None):
+        '''
+        init
+        :param text: [sent, sent, ...]
+        '''
+        self._texts = copy.deepcopy(text) if text is not None else ['']
+
+    def get_phrase(self, min_frequency=2, min_length=2):
+        '''
+
+        :return: a phrase dict: {ph1: n, ph2: n, ...}
+        '''
+        tmp_dic = {}
+        for sent in self._texts:
+            for i in range(len(sent) - min_length + 1):
+                tmp_p = sent[i:i+min_length]
+                if tmp_p in tmp_dic:
+                    tmp_dic[tmp_p] += 1
+                else:
+                    tmp_dic[tmp_p] = 1
+        to_delete_list = []
+        for ph in tmp_dic:
+            if tmp_dic[ph] < min_frequency:
+                to_delete_list.append(ph)
+        for ph in to_delete_list:
+            tmp_dic.pop(ph)
+        return tmp_dic
+
+    def get_most_frequent_phrase(self, min_frequency=1, min_length=1, num=1):
+        tmp_dic = {}
+        for sent in self._texts:
+            for i in range(len(sent) - min_length + 1):
+                tmp_p = sent[i:i + min_length]
+                if tmp_p in tmp_dic:
+                    tmp_dic[tmp_p] += 1
+                else:
+                    tmp_dic[tmp_p] = 1
+        to_delete_list = []
+        for ph in tmp_dic:
+            if tmp_dic[ph] < min_frequency:
+                to_delete_list.append(ph)
+        for ph in to_delete_list:
+            tmp_dic.pop(ph)
+        ret = [(k, v) for (k, v) in tmp_dic.items()]
+        ret.sort(key=lambda x:x[1], reverse=True)
+        ret = ret[:num]
+        return ret
+
+
+
+
+
+
 if __name__ == '__main__':
     '''
     ret = sentence_cut('haha.uuu?enen!hehe。我是，一个狼人！信吗？哈哈。和')
@@ -117,4 +186,8 @@ if __name__ == '__main__':
     '''
     t1 = 'tyii'
     t2 = 'tyui'
-    print(similarity(t1, t2))
+    print(get_pinyin("行", tone='symbol', duoyin=True))
+    tt = ['我们是中国人', '我们是共产主义接班人']
+    ff = Phrase(tt)
+    print(ff.get_most_frequent_phrase(min_length=4, num=2))
+    print(ff.get_phrase(min_length=2))

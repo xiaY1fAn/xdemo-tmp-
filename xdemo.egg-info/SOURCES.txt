@@ -1,5 +1,6 @@
 README.md
 setup.py
+Xdemo/Embedding.py
 Xdemo/Text.py
 Xdemo/Vocabulary.py
 Xdemo/__init__.py

@@ -10,17 +10,15 @@
  文本相似度|Y|  
  词典|Y|  
  文本匹配|Y|  
- 自动注音|1|  
- 短语提取|1|  
- 简繁转换|1|  
- Embedding|1|  
+ 自动注音|Y|  
+ 短语提取|Y|    
+ Embedding|Y|  
  分词|Y|  
  POS|Y|  
  NER|Y|  
- 句法分析|2|  
- 语义角色标注|2|    
- 语言模型|2|  
- 网页展示优化|3|  
+ 句法分析|1|      
+ 语言模型|1|  
+ 网页展示优化|1|  
  
  ## 部分功能使用说明  
  ### 分句
@@ -64,6 +62,33 @@ python Vocabulary.py file > vocab
 from Xdemo import Text
 ret = Text.match(texts, substr)
 目前只支持精确匹配，后续计划增加模糊匹配和支持语义层次的匹配算法。
+
+```
+
+### 注音
+```python
+from Xdemo import  Text
+ret = Text.get_pinyin(text)
+
+```
+
+### 短语提取
+
+```python
+from Xdemo import Text
+ph = Text.Phrase(texts)
+ret = ph.get_phrase(min_length=2, min_frequency=2)
+ret = ph.get_most_frequent_phrase(min_length=2, min_frequency=2, num=5)
+
+```
+
+### Embedding
+
+```python
+from Xdemo import Embedding
+Em = Embedding.Embd(file, dim=300, binaray=False) //file是Embedding文件，格式为word dim1 dim2 ...
+word_em = Em[word]       //读取Embedding
+word_similar = Em.similar(word, num=5) //相似词
 
 ```
  
